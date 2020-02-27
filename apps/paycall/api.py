@@ -3,7 +3,7 @@ from rest_framework.decorators import list_route
 from core.decorator.response import Core_connector
 from libs.utils.http_request import send_request
 from utils.exceptions import PubErrorCustom,InnerErrorCustom
-from apps.paycall.utils import PayCallWechat,PayCallFlm,get_qrcode_path,PayCallNxys,PayCallJyys,PayCallYzf
+from apps.paycall.utils import PayCallWechat,PayCallFlm,get_qrcode_path,PayCallNxys,PayCallJyys,PayCallYzf,PayCallAlipay
 from apps.paycall.models import FlmTranList
 from apps.order.models import Order
 from apps.pay.utils import QrCodeWechat,QrCodeFlm
@@ -86,6 +86,11 @@ class PayCallAPIView(GenericViewSetCustom):
     @Core_connector(transaction=True, lock={"resource":zhejiangnongxin_call_mobile_CALLBACK})
     def zhejiangnongxin_call_mobile(self, request, *args, **kwargs):
         return PayCallJyys(name=request.data_format.get("name"), amount=request.data_format.get('amout')).run()
+
+    @list_route(methods=['POST'])
+    @Core_connector(transaction=True,lock=True)
+    def alipay_call_mobile(self, request, *args, **kwargs):
+        return PayCallAlipay(name=request.data_format.get("name"),amount=request.data_format.get('amout')).run()
 
     #回调测试
     @list_route(methods=['POST'])

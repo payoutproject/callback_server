@@ -449,6 +449,17 @@ class PayCallYzf(PayCallBase):
         super().__init__(**kwargs)
 
 
+class PayCallAlipay(PayCallBase):
+
+    def __init__(self,**kwargs):
+        """
+        支付宝个码
+        :param kwargs:
+        """
+        kwargs.setdefault("type","QR030")
+        super().__init__(**kwargs)
+
+
 class PayCallFlm(PayCallBase):
 
     def __init__(self,**kwargs):
