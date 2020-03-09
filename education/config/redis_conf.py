@@ -1,34 +1,54 @@
 
-REDISPASSWORD = 'plokiqikj##mlad,..ad'
-REDISURL = '172.31.137.187'
-REDISPORT = '6379'
+import os
+
+REDISHOST = os.environ.get('REDISHOST', 'localhost')
+REDISPASS = os.environ.get('REDISPASS', '123456')
+REDISPORT = os.environ.get('REDISPORT', '6379')
 
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://{}:{}/0".format(REDISURL,REDISPORT),
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            'CONNECTION_POOL_KWARGS':{"max_connections":100},
-            "PASSWORD": REDISPASSWORD
-        }
-    },
-    "helper": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://{}:{}/4".format(REDISURL,REDISPORT),
+        "LOCATION": "redis://{}:{}/0".format(REDISHOST, REDISPORT),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             'CONNECTION_POOL_KWARGS': {"max_connections": 100},
-            "PASSWORD": REDISPASSWORD
+            "PASSWORD": REDISPASS
+        }
+    },
+    "token": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://{}:{}/1".format(REDISHOST, REDISPORT),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            'CONNECTION_POOL_KWARGS': {"max_connections": 100},
+            "PASSWORD": REDISPASS
+        }
+    },
+    "cache": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://{}:{}/2".format(REDISHOST, REDISPORT),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            'CONNECTION_POOL_KWARGS': {"max_connections": 100},
+            "PASSWORD": REDISPASS
         }
     },
     "orders": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://{}:{}/5".format(REDISURL,REDISPORT),
+        "LOCATION": "redis://{}:{}/3".format(REDISHOST, REDISPORT),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             'CONNECTION_POOL_KWARGS': {"max_connections": 100},
-            "PASSWORD": REDISPASSWORD
+            "PASSWORD": REDISPASS
+        }
+    },
+    "generator": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://{}:{}/5".format(REDISHOST, REDISPORT),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            'CONNECTION_POOL_KWARGS': {"max_connections": 100},
+            "PASSWORD": REDISPASS
         }
     }
 }
