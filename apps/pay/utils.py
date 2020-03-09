@@ -338,3 +338,19 @@ class QrCodeYzf(QrcodeBase):
         :return:  True : 有效 , False : 失效
         """
         return super().qrcode_valid(updtime=updtime)
+
+class QrCodeAlipay(QrcodeBase):
+    """
+    支付宝个嘛
+    """
+
+    def __init__(self):
+        super().__init__(type='QR030')
+
+    def qrcode_valid(self, updtime=None):
+        """
+        判断付临门二维码是否有效
+        :param updtime:  创建时间时间戳
+        :return:  True : 有效 , False : 失效
+        """
+        return super().qrcode_valid(updtime=updtime)
