@@ -11,7 +11,7 @@ django-cors-headers
 openpyxl
 django-redis
 redis
-arrow
+arrow==0.13.1
 demjson
 django_crontab
 pyotp
