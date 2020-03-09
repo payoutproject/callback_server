@@ -88,7 +88,7 @@ class PayCallAPIView(GenericViewSetCustom):
         return PayCallJyys(name=request.data_format.get("name"), amount=request.data_format.get('amout')).run()
 
     @list_route(methods=['POST'])
-    @Core_connector(transaction=True,lock=True)
+    @Core_connector(transaction=True,lock={"resource":zhejiangnongxin_call_mobile_CALLBACK})
     def alipay_call_mobile(self, request, *args, **kwargs):
         return PayCallAlipay(name=request.data_format.get("name"),amount=request.data_format.get('amout')).run()
 
